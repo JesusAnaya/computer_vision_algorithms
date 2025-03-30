@@ -10,8 +10,8 @@
 namespace opencv_examples {
     /**
      * @brief Constructor for ImagesRepository.
-     * Find the images in the path ./data, and store them in a map
-     * by the image name as key and the path as value.
+     * This constructor reads the images from the data directory and stores them in a map.
+     * The key is the image name and the value is the image path.
      */
     ImagesRepository::ImagesRepository() {
         // Read the images from the data directory using the library filesystem
@@ -31,6 +31,8 @@ namespace opencv_examples {
     /**
      * @brief Get the image path from the map.
      * This function is used to get the image path from the map.
+     * @param imageName The name of the image.
+     * @return The path of the image.
      */
      std::string ImagesRepository::getImagePathFromMap(const std::string& imageName) {
         auto it = images_map.find(imageName);
@@ -41,12 +43,17 @@ namespace opencv_examples {
         }
     }
 
+    /*
+     * @brief Static instance of the ImagesRepository class.
+     * This is used to create a singleton instance of the class.
+     */
     ImagesRepository* ImagesRepository::instance = nullptr;
 
      /**
      * @brief Get the image path from the map.
      * This function is used to get the image path from the map.
-     * If the image is not found, it will return nullptr.
+     * @param imageName The name of the image.
+     * @return The path of the image.
      */
     std::string ImagesRepository::getImagePath(const std::string& imageName) {
         if (instance == nullptr) {

@@ -47,7 +47,7 @@ namespace opencv_examples {
      * @brief Static instance of the ImagesRepository class.
      * This is used to create a singleton instance of the class.
      */
-    ImagesRepository* ImagesRepository::instance = nullptr;
+    std::unique_ptr<ImagesRepository> ImagesRepository::instance = nullptr;
 
      /**
      * @brief Get the image path from the map.
@@ -57,7 +57,7 @@ namespace opencv_examples {
      */
     std::string ImagesRepository::getImagePath(const std::string& imageName) {
         if (instance == nullptr) {
-            instance = new ImagesRepository();
+            instance = std::make_unique<ImagesRepository>();
         }
         std::string path = instance->getImagePathFromMap(imageName);
         if (path.empty()) {

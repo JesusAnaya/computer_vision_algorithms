@@ -4,6 +4,7 @@
 
 #ifndef OPENCV_COURSER_IMAGESREPOSITORY_H
 #define OPENCV_COURSER_IMAGESREPOSITORY_H
+#include <memory>
 #include <string>
 #include <map>
 
@@ -15,7 +16,7 @@ namespace opencv_examples {
         static std::string getImagePath(const std::string& imageName);
 
     private:
-        static ImagesRepository *instance;
+        static std::unique_ptr<ImagesRepository> instance;
         std::map<std::string, std::string> images_map = {};
         std::string getImagePathFromMap(const std::string& imageName);
     };
